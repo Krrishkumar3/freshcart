@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="FreshCart — Premium grocery delivery. Browse fresh fruits, vegetables, dairy, and more. Fast delivery to your doorstep.">
+  <title>FreshCart — Fresh Groceries Delivered</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🥬</text></svg>">
+</head>
+<body>
+
+  <!-- ═══ HEADER ═══ -->
+  <header class="header" id="header">
+    <div class="header-inner">
+      <a href="/" class="logo">
+        <div class="logo-icon">🥬</div>
+        FreshCart
+      </a>
+      <div class="header-search">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="searchInput" placeholder="Search fresh groceries..." autocomplete="off">
+      </div>
+      <div class="header-actions">
+        <button class="header-btn" id="themeToggle" title="Toggle dark mode">🌙</button>
+        <button class="header-btn" id="cartToggle" title="Open cart">
+          🛒
+          <span class="cart-badge hidden" id="cartBadge">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ═══ MAIN ═══ -->
+  <main class="main">
+    <div class="container">
+
+      <!-- Hero Section -->
+      <section class="hero" id="hero">
+        <div class="hero-content">
+          <div class="hero-badge">🌿 Farm Fresh, Always</div>
+          <h1>Fresh Groceries,<br>Delivered to Your <span class="highlight">Doorstep</span></h1>
+          <p>Hand-picked produce, premium meats, and artisan goods — all delivered in as little as 2 hours. Quality you can taste.</p>
+          <div class="hero-stats">
+            <div class="hero-stat">
+              <div class="hero-stat-value">500+</div>
+              <div class="hero-stat-label">Products</div>
+            </div>
+            <div class="hero-stat">
+              <div class="hero-stat-value">2hr</div>
+              <div class="hero-stat-label">Delivery</div>
+            </div>
+            <div class="hero-stat">
+              <div class="hero-stat-value">$35+</div>
+              <div class="hero-stat-label">Free Delivery</div>
+            </div>
+            <div class="hero-stat">
+              <div class="hero-stat-value">4.9★</div>
+              <div class="hero-stat-label">Customer Rating</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Filters -->
+      <section class="filters-section" id="filters">
+        <div class="filters-bar">
+          <div class="category-pills" id="categoryPills"></div>
+          <select class="sort-select" id="sortSelect">
+            <option value="">Sort by</option>
+            <option value="price-asc">Price: Low → High</option>
+            <option value="price-desc">Price: High → Low</option>
+            <option value="rating">Highest Rated</option>
+            <option value="name">Name A-Z</option>
+          </select>
+        </div>
+      </section>
+
+      <!-- Products -->
+      <section class="products-section" id="productsSection">
+        <div class="section-header">
+          <h2 class="section-title">Fresh Picks</h2>
+          <span class="product-count" id="productCount"></span>
+        </div>
+        <div class="products-grid" id="productsGrid"></div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- ═══ FOOTER ═══ -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <span class="footer-text">© 2026 FreshCart. All rights reserved.</span>
+      <div class="footer-links">
+        <a href="#" class="footer-link">About</a>
+        <a href="#" class="footer-link">Privacy</a>
+        <a href="#" class="footer-link">Terms</a>
+        <a href="#" class="footer-link">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ═══ CART SIDEBAR ═══ -->
+  <div class="cart-overlay" id="cartOverlay"></div>
+  <aside class="cart-sidebar" id="cartSidebar">
+    <div class="cart-header">
+      <h2 class="cart-title">🛒 Your Cart <span class="cart-item-count" id="cartItemCount">0</span></h2>
+      <button class="cart-close-btn" id="cartClose">✕</button>
+    </div>
+    <div class="cart-items" id="cartItems">
+      <div class="cart-empty" id="cartEmpty">
+        <div class="cart-empty-icon">🛒</div>
+        <h3>Your cart is empty</h3>
+        <p>Add some fresh groceries to get started!</p>
+      </div>
+    </div>
+    <div class="delivery-progress" id="deliveryProgress" style="display:none;">
+      <div class="delivery-text" id="deliveryText"></div>
+      <div class="delivery-bar"><div class="delivery-bar-fill" id="deliveryBarFill"></div></div>
+    </div>
+    <div class="cart-summary" id="cartSummary" style="display:none;">
+      <div class="cart-summary-row">
+        <span>Subtotal</span>
+        <span id="cartSubtotal">$0.00</span>
+      </div>
+      <div class="cart-summary-row">
+        <span>Tax (8%)</span>
+        <span id="cartTax">$0.00</span>
+      </div>
+      <div class="cart-summary-row">
+        <span>Delivery</span>
+        <span id="cartDelivery">$0.00</span>
+      </div>
+      <div class="cart-summary-row total">
+        <span>Total</span>
+        <span id="cartTotal">$0.00</span>
+      </div>
+      <button class="checkout-btn" id="checkoutBtn">
+        Proceed to Checkout →
+      </button>
+    </div>
+  </aside>
+
+  <!-- ═══ CHECKOUT MODAL ═══ -->
+  <div class="modal-overlay" id="checkoutModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h2>📦 Checkout</h2>
+        <button class="modal-close" id="modalClose">✕</button>
+      </div>
+      <div class="modal-body" id="modalBody">
+        <form id="checkoutForm">
+          <div class="form-group">
+            <label for="customerName">Full Name</label>
+            <input type="text" id="customerName" placeholder="John Doe" required>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="customerEmail">Email</label>
+              <input type="email" id="customerEmail" placeholder="john@example.com" required>
+            </div>
+            <div class="form-group">
+              <label for="customerPhone">Phone</label>
+              <input type="tel" id="customerPhone" placeholder="(555) 123-4567">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="customerAddress">Delivery Address</label>
+            <textarea id="customerAddress" placeholder="123 Main St, Apt 4B, New York, NY 10001" required></textarea>
+          </div>
+          <button type="submit" class="place-order-btn" id="placeOrderBtn">
+            🛍️ Place Order
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ TOAST CONTAINER ═══ -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <script src="/js/app.js"></script>
+</body>
+</html>
